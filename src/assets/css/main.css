@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-cream text-charcoal font-serif;
+  background-image: url('https://images.unsplash.com/photo-1566041510639-8d95a2490bfb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  background-color: rgba(248, 245, 240, 0.92);
+}
+
+@layer components {
+  .page-container {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-handwriting font-light text-slate mb-8 relative inline-block;
+  }
+
+  .section-title::after {
+    content: "";
+    @apply absolute bottom-0 left-0 w-full h-px bg-taupe opacity-50;
+  }
+
+  .nav-link {
+    @apply text-slate hover:text-charcoal transition-colors duration-300 uppercase tracking-widest text-sm font-sans font-light;
+  }
+
+  .nav-link.active {
+    @apply text-charcoal relative;
+  }
+
+  .nav-link.active::after {
+    content: "";
+    @apply absolute bottom-0 left-0 w-full h-px bg-taupe;
+  }
+
+  .btn {
+    @apply px-6 py-2 border border-taupe text-slate hover:bg-taupe hover:text-cream transition-all duration-300 uppercase tracking-widest text-xs font-sans;
+  }
+
+  .work-card {
+    @apply relative overflow-hidden cursor-pointer;
+  }
+
+  /* 添加group类到HTML元素上，而不是通过@apply */
+
+  .work-card-overlay {
+    @apply absolute inset-0 bg-charcoal bg-opacity-0 group-hover:bg-opacity-60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500;
+  }
+
+  .work-card-title {
+    @apply text-cream font-handwriting text-2xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500;
+  }
+
+  .social-icon {
+    @apply text-slate hover:text-charcoal transition-colors duration-300 text-xl mx-2;
+  }
+
+  /* 添加关于页面的样式 */
+  .prose {
+    @apply text-slate;
+  }
+
+  .prose h3 {
+    @apply text-xl font-handwriting text-slate mt-12 mb-6;
+  }
+
+  .prose p {
+    @apply text-lg leading-relaxed mb-6;
+  }
+
+  .page-enter-active,
+  .page-leave-active {
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  .page-enter-from,
+  .page-leave-to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
