@@ -13,6 +13,11 @@ const routes = [
     component: () => import('../views/Works.vue')
   },
   {
+    path: '/connect-the-dots',
+    name: 'ConnectTheDots',
+    component: () => import('../views/ConnectTheDots.vue')
+  },
+  {
     path: '/services',
     name: 'Services',
     component: () => import('../views/Services.vue')
@@ -26,6 +31,11 @@ const routes = [
     path: '/contact',
     name: 'Contact',
     component: () => import('../views/Contact.vue')
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('../views/NotFound.vue')
   }
 ]
 

@@ -2,6 +2,16 @@ import { defineStore } from 'pinia'
 
 export const usePortfolioStore = defineStore('portfolio', {
   state: () => ({
+    // 主页内容
+    homeContent: {
+      // Hero部分内容
+      heroBio: '我致力于"点悟"理念的实践，连接看似分散的知识点，在数据与体验的交汇处发现创新的可能，让复杂的技术以简约优雅的方式服务于人类需求。',
+
+      // 关于预览部分内容
+      aboutPreviewText: '我专注于机器学习模式与人类体验之间的微妙联系，通过创新算法和直观界面，从日常交互中捕捉非凡洞察。我的工作融合优雅的代码工艺与现代设计理念，旨在以清晰和精准的方式传递深刻的影响力。'
+    },
+
+    // 个人信息（用于关于页面和其他地方）
     artist: {
       name: 'Fueny',
       title: 'ML工程师 / 前端开发',
@@ -19,6 +29,75 @@ export const usePortfolioStore = defineStore('portfolio', {
         '复杂问题分解与重构',
         '直觉与数据驱动相结合',
         '持续学习与迭代改进'
+      ]
+    },
+
+    // Connect the Dots (点悟) 页面内容
+    connectTheDots: {
+      introduction: '点悟（Connect the Dots）是一种融合东方哲学与现代数据科学的思维方法论，它强调在看似无关的信息点之间建立联系，发现隐藏的模式和洞察。这种方法不仅是一种技术思维，更是一种生活哲学，帮助我们在复杂的世界中找到清晰的路径和创新的解决方案。',
+      quote: '不是所有的点都需要被连接，但所有的连接都始于点与点之间的关系。在混沌中寻找秩序，在分散中发现整体，这就是点悟的精髓。',
+      quoteAuthor: 'Fueny',
+      principles: [
+        {
+          title: '跨界思维',
+          description: '打破学科和领域的界限，将不同领域的知识和方法论相互融合，创造出新的视角和解决方案。',
+          icon: 'bi bi-intersect'
+        },
+        {
+          title: '模式识别',
+          description: '培养发现重复模式和规律的能力，从看似随机的数据中提取有意义的信息和洞察。',
+          icon: 'bi bi-grid-3x3'
+        },
+        {
+          title: '整体思考',
+          description: '在关注细节的同时不失对整体的把握，理解部分与整体之间的相互关系和影响。',
+          icon: 'bi bi-circle-square'
+        },
+        {
+          title: '直觉与逻辑结合',
+          description: '平衡直觉的创造力和逻辑的严谨性，让感性和理性相互补充，达到更全面的理解。',
+          icon: 'bi bi-yin-yang'
+        }
+      ],
+      applications: [
+        {
+          title: '技术创新',
+          description: '在不同技术领域之间建立联系，发现创新的技术解决方案，推动技术的融合与进步。',
+          icon: 'bi bi-cpu',
+          color: '#8B7355' // 与主题色调和的棕色
+        },
+        {
+          title: '产品设计',
+          description: '连接用户需求、技术可能性和商业价值，创造既实用又美观的产品体验。',
+          icon: 'bi bi-palette',
+          color: '#A67B5B' // 稍浅的棕色
+        },
+        {
+          title: '数据分析',
+          description: '在海量数据中发现有意义的关联和模式，提取关键洞察，支持决策制定。',
+          icon: 'bi bi-graph-up',
+          color: '#C8B097' // 浅棕色
+        },
+        {
+          title: '学习方法',
+          description: '建立知识之间的联系，形成知识网络，提高学习效率和知识应用能力。',
+          icon: 'bi bi-book',
+          color: '#D4C4B7' // 更浅的棕色
+        }
+      ],
+      methods: [
+        {
+          title: '知识地图构建',
+          description: '将相关知识点可视化为地图，明确它们之间的关系，发现知识空白和连接点。'
+        },
+        {
+          title: '跨领域阅读',
+          description: '有意识地阅读不同领域的书籍和文章，寻找共通的原则和可迁移的方法。'
+        },
+        {
+          title: '关联思考练习',
+          description: '定期练习将看似无关的概念联系起来，培养创造性思维和模式识别能力。'
+        }
       ]
     },
     works: [

@@ -1,0 +1,316 @@
+/* 鼠标跟随效果 */
+.cursor-follower {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(139, 115, 85, 0.05);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease-out, background-color 0.3s ease-out;
+  mix-blend-mode: multiply;
+}
+
+.cursor-pointer {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background-color: rgba(139, 115, 85, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease-out;
+}
+
+/* 背景效果 */
+.background-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.bg-particle {
+  will-change: transform;
+}
+
+/* 页面过渡动画 */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.6s cubic-bezier(0.33, 1, 0.68, 1),
+              transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+/* 滚动触发动画类 */
+.animate-fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: none;
+}
+
+.animate-fade-in {
+  opacity: 0;
+  animation: none;
+}
+
+.animate-scale-in {
+  opacity: 0;
+  transform: scale(0.9);
+  animation: none;
+}
+
+/* 当首次访问时运行动画 */
+.isFirstVisit .animate-fade-up {
+  animation: fadeUp 0.8s ease forwards;
+}
+
+.isFirstVisit .animate-fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.isFirstVisit .animate-scale-in {
+  animation: scaleIn 0.8s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 导航链接动画 */
+.nav-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-underline {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  transform-origin: right center;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover .nav-underline {
+  transform-origin: left center;
+  transform: scaleX(1);
+}
+
+/* 按钮动画 */
+.btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.btn:hover::after {
+  animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(20, 20);
+    opacity: 0;
+  }
+}
+
+/* 图片悬停效果 */
+.img-hover-zoom {
+  overflow: hidden;
+  position: relative;
+}
+
+.img-hover-zoom img {
+  transition: transform 0.5s ease;
+}
+
+.img-hover-zoom:hover img {
+  transform: scale(1.05);
+}
+
+/* 作品卡片样式增强 */
+.work-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  background-color: #fff;
+  will-change: transform, box-shadow;
+}
+
+.work-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.work-card-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(40, 36, 33, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.5s ease;
+  z-index: 1;
+}
+
+.work-card:hover .work-card-overlay {
+  background-color: rgba(40, 36, 33, 0.7);
+  opacity: 1;
+}
+
+.work-card-title {
+  transform: translateY(10px);
+  transition: transform 0.5s ease;
+}
+
+.work-card:hover .work-card-title {
+  transform: translateY(0);
+}
+
+/* 文字渐变动画 */
+.text-gradient {
+  background: linear-gradient(90deg, #8B7355, #A67B5B, #8B7355);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient 8s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 淡入动画 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+
+/* 上升动画 */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: none;
+}
+
+.isFirstVisit .slide-up {
+  animation: slideUp 0.8s ease forwards;
+}
+
+/* 交错动画 */
+.stagger-item {
+  opacity: 0;
+}
+
+/* 边框动画 */
+.animate-border {
+  animation: borderPulse 3s ease-in-out infinite;
+}
+
+@keyframes borderPulse {
+  0% {
+    border-color: rgba(139, 115, 85, 0.5);
+  }
+  50% {
+    border-color: rgba(139, 115, 85, 0.8);
+  }
+  100% {
+    border-color: rgba(139, 115, 85, 0.5);
+  }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) {
+  .cursor-follower,
+  .cursor-pointer {
+    display: none;
+  }
+
+  .btn::after {
+    display: none;
+  }
+
+  .nav-underline {
+    display: none;
+  }
+}

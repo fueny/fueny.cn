@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CSS变量 */
+:root {
+  --color-cream: #F8F5F0;
+  --color-sand: #E8E1D6;
+  --color-taupe: #8B7355;
+  --color-mocha: #6B5B45;
+  --color-slate: #4A4A4A;
+  --color-charcoal: #282421;
+}
+
+/* 基础样式 */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* 确保页面在加载时不闪烁 */
 body {
   @apply bg-cream text-charcoal font-serif;
   background-image: url('https://images.unsplash.com/photo-1566041510639-8d95a2490bfb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
@@ -10,15 +30,24 @@ body {
   background-position: center;
   background-blend-mode: overlay;
   background-color: rgba(248, 245, 240, 0.92);
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* 防止加载时内容闪烁 */
+.js-loading body {
+  opacity: 0;
 }
 
 @layer components {
+  /* 响应式容器 */
   .page-container {
-    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12;
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-12;
   }
 
+  /* 响应式标题 */
   .section-title {
-    @apply text-3xl md:text-4xl font-handwriting font-light text-slate mb-8 relative inline-block;
+    @apply text-2xl sm:text-3xl md:text-4xl font-handwriting font-light text-slate mb-6 sm:mb-8 relative inline-block;
   }
 
   .section-title::after {
@@ -26,8 +55,9 @@ body {
     @apply absolute bottom-0 left-0 w-full h-px bg-taupe opacity-50;
   }
 
+  /* 响应式导航链接 */
   .nav-link {
-    @apply text-slate hover:text-charcoal transition-colors duration-300 uppercase tracking-widest text-sm font-sans font-light;
+    @apply text-slate hover:text-charcoal transition-colors duration-300 uppercase tracking-widest font-sans font-light;
   }
 
   .nav-link.active {
@@ -39,39 +69,61 @@ body {
     @apply absolute bottom-0 left-0 w-full h-px bg-taupe;
   }
 
+  /* 响应式按钮 */
   .btn {
-    @apply px-6 py-2 border border-taupe text-slate hover:bg-taupe hover:text-cream transition-all duration-300 uppercase tracking-widest text-xs font-sans;
+    @apply px-4 py-1.5 sm:px-6 sm:py-2 border border-taupe text-slate hover:bg-taupe hover:text-cream transition-all duration-300 uppercase tracking-widest text-xs font-sans;
   }
 
+  /* 替代按钮样式 */
+  .btn-alt {
+    @apply border-none bg-taupe text-cream hover:bg-slate shadow-md hover:shadow-lg;
+  }
+
+  /* 响应式文本 */
+  .text-responsive {
+    @apply text-sm sm:text-base md:text-lg;
+  }
+
+  /* 响应式间距 */
+  .spacing-responsive {
+    @apply my-4 sm:my-6 md:my-8;
+  }
+
+  /* 作品卡片基础样式 - 详细样式在animations.css中定义 */
   .work-card {
-    @apply relative overflow-hidden cursor-pointer;
-  }
-
-  /* 添加group类到HTML元素上，而不是通过@apply */
-
-  .work-card-overlay {
-    @apply absolute inset-0 bg-charcoal bg-opacity-0 group-hover:bg-opacity-60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500;
+    @apply relative cursor-pointer;
   }
 
   .work-card-title {
-    @apply text-cream font-handwriting text-2xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500;
+    @apply text-cream font-handwriting text-xl sm:text-2xl;
   }
 
+  /* 响应式社交图标 */
   .social-icon {
-    @apply text-slate hover:text-charcoal transition-colors duration-300 text-xl mx-2;
+    @apply text-slate hover:text-charcoal transition-colors duration-300 mx-1.5 sm:mx-2;
   }
 
-  /* 添加关于页面的样式 */
+  /* 响应式文章样式 */
   .prose {
     @apply text-slate;
   }
 
   .prose h3 {
-    @apply text-xl font-handwriting text-slate mt-12 mb-6;
+    @apply text-lg sm:text-xl font-handwriting text-slate mt-8 sm:mt-12 mb-4 sm:mb-6;
   }
 
   .prose p {
-    @apply text-lg leading-relaxed mb-6;
+    @apply text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6;
+  }
+
+  /* 响应式表单元素 */
+  .form-input {
+    @apply w-full px-3 sm:px-4 py-1.5 sm:py-2 bg-cream border border-taupe focus:outline-none focus:ring-1 focus:ring-taupe rounded-sm text-sm sm:text-base;
+  }
+
+  /* 响应式卡片 */
+  .card-responsive {
+    @apply p-3 sm:p-4 md:p-6;
   }
 
   .page-enter-active,
@@ -83,5 +135,87 @@ body {
   .page-leave-to {
     opacity: 0;
     transform: translateY(10px);
+  }
+}
+
+/* 特定设备的媒体查询 */
+
+/* 小型手机 (320px - 480px) */
+@media (max-width: 480px) {
+  html {
+    font-size: 14px; /* 稍微缩小基础字体大小 */
+  }
+
+  .section-title {
+    margin-bottom: 1rem;
+  }
+
+  .page-container {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+/* 平板设备 (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .nav-link {
+    letter-spacing: 0.05em; /* 减小字母间距以适应平板 */
+  }
+}
+
+/* iPad Pro 和小型笔记本 (1024px - 1366px) */
+@media (min-width: 1024px) and (max-width: 1366px) {
+  .max-w-6xl {
+    max-width: 90%; /* 在中等屏幕上使用百分比宽度 */
+  }
+}
+
+/* 横屏手机 */
+@media (max-height: 480px) and (orientation: landscape) {
+  .loading-screen {
+    padding: 0.5rem;
+  }
+
+  .canvas-container {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  .loading-bar-container {
+    margin-top: 0.5rem;
+  }
+}
+
+/* 触摸设备优化 */
+.touch-device {
+  /* 增加点击区域大小 */
+  .btn, .nav-link, .social-icon, a {
+    padding: 0.5rem;
+    margin: -0.5rem;
+  }
+
+  /* 改善表单元素在触摸设备上的体验 */
+  input, textarea, select, button {
+    font-size: 16px !important; /* 防止iOS缩放 */
+  }
+
+  /* 触摸设备上的作品卡片样式 */
+  .work-card .work-card-overlay {
+    background-color: rgba(40, 36, 33, 0.4);
+    opacity: 0.8;
+  }
+
+  .work-card:active .work-card-overlay {
+    background-color: rgba(40, 36, 33, 0.7);
+    opacity: 1;
+  }
+
+  .work-card .work-card-title {
+    transform: translateY(0);
+  }
+
+  /* 滚动容器 */
+  .scrollable {
+    -webkit-overflow-scrolling: touch;
   }
 }

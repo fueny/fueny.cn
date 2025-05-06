@@ -9,21 +9,25 @@
 
     <header class="bg-cream bg-opacity-90 backdrop-blur-sm border-b border-taupe border-opacity-20 sticky top-0 z-50">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-20">
+        <div class="flex justify-between items-center h-16 sm:h-18 md:h-20">
           <!-- Logo -->
           <div class="flex-shrink-0">
             <router-link to="/" class="flex items-center" @click="closeMenu">
-              <span class="font-handwriting text-2xl text-slate">Fueny</span>
+              <span class="font-handwriting text-xl sm:text-2xl text-slate">Fueny</span>
             </router-link>
           </div>
 
           <!-- Desktop Navigation -->
-          <nav class="hidden md:flex space-x-8">
-            <router-link to="/" class="nav-link">首页</router-link>
-            <router-link to="/works" class="nav-link">作品集</router-link>
-            <router-link to="/services" class="nav-link">服务</router-link>
-            <router-link to="/about" class="nav-link">关于</router-link>
-            <router-link to="/contact" class="nav-link">联系</router-link>
+          <nav class="hidden md:flex space-x-3 lg:space-x-6">
+            <router-link to="/" class="nav-link text-xs lg:text-sm">首页</router-link>
+            <router-link to="/works" class="nav-link text-xs lg:text-sm">作品集</router-link>
+            <router-link to="/connect-the-dots" class="nav-link text-xs lg:text-sm">
+              <span class="hidden lg:inline">Connect the Dots (点悟)</span>
+              <span class="lg:hidden">点悟</span>
+            </router-link>
+            <router-link to="/services" class="nav-link text-xs lg:text-sm">服务</router-link>
+            <router-link to="/about" class="nav-link text-xs lg:text-sm">关于</router-link>
+            <router-link to="/contact" class="nav-link text-xs lg:text-sm">联系</router-link>
           </nav>
 
           <!-- Mobile menu button -->
@@ -42,41 +46,48 @@
       <!-- Mobile Navigation -->
       <div
         class="md:hidden bg-cream bg-opacity-95 backdrop-blur-sm border-b border-taupe border-opacity-20 overflow-hidden transition-all duration-300 ease-in-out"
-        :class="isMenuOpen ? 'max-h-60' : 'max-h-0'"
+        :class="isMenuOpen ? 'max-h-[calc(100vh-4rem)]' : 'max-h-0'"
       >
-        <div class="px-4 py-3 space-y-2">
+        <div class="px-4 py-3 space-y-1 max-h-[calc(100vh-4rem)] overflow-y-auto">
           <router-link
             @click="closeMenu"
             to="/"
-            class="nav-link block py-3 px-4 rounded-md hover:bg-sand transition-colors duration-200"
+            class="nav-link block py-2.5 sm:py-3 px-4 rounded-md hover:bg-sand transition-colors duration-200 text-sm"
           >
             首页
           </router-link>
           <router-link
             @click="closeMenu"
             to="/works"
-            class="nav-link block py-3 px-4 rounded-md hover:bg-sand transition-colors duration-200"
+            class="nav-link block py-2.5 sm:py-3 px-4 rounded-md hover:bg-sand transition-colors duration-200 text-sm"
           >
             作品集
           </router-link>
           <router-link
             @click="closeMenu"
+            to="/connect-the-dots"
+            class="nav-link block py-2.5 sm:py-3 px-4 rounded-md hover:bg-sand transition-colors duration-200 text-sm"
+          >
+            Connect the Dots (点悟)
+          </router-link>
+          <router-link
+            @click="closeMenu"
             to="/services"
-            class="nav-link block py-3 px-4 rounded-md hover:bg-sand transition-colors duration-200"
+            class="nav-link block py-2.5 sm:py-3 px-4 rounded-md hover:bg-sand transition-colors duration-200 text-sm"
           >
             服务
           </router-link>
           <router-link
             @click="closeMenu"
             to="/about"
-            class="nav-link block py-3 px-4 rounded-md hover:bg-sand transition-colors duration-200"
+            class="nav-link block py-2.5 sm:py-3 px-4 rounded-md hover:bg-sand transition-colors duration-200 text-sm"
           >
             关于
           </router-link>
           <router-link
             @click="closeMenu"
             to="/contact"
-            class="nav-link block py-3 px-4 rounded-md hover:bg-sand transition-colors duration-200"
+            class="nav-link block py-2.5 sm:py-3 px-4 rounded-md hover:bg-sand transition-colors duration-200 text-sm"
           >
             联系
           </router-link>
