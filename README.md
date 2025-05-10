@@ -21,6 +21,7 @@
 - 服务介绍
 - 关于页面
 - 联系表单（支持直接发送邮件）
+- 自定义404页面
 
 ## 安装与运行
 
@@ -61,6 +62,22 @@ npm run preview
 yarn preview
 ```
 
+## 部署
+
+### Vercel部署
+
+本项目已配置好用于Vercel部署的必要文件：
+
+1. `vercel.json` - 配置SPA路由重写规则
+2. 环境变量支持 - 通过`.env`文件和Vercel环境变量设置
+
+部署步骤：
+
+1. 将代码推送到GitHub/GitLab/Bitbucket
+2. 在Vercel上导入项目
+3. 设置必要的环境变量（特别是EmailJS相关配置）
+4. 部署完成后，可以添加自定义域名
+
 ## 项目结构
 
 ```
@@ -85,7 +102,9 @@ fueny.cn/
 │   ├── App.vue      # 根组件
 │   └── main.js      # 应用入口
 ├── index.html       # HTML模板
-└── vite.config.js   # Vite配置
+├── vite.config.js   # Vite配置
+├── vercel.json      # Vercel部署配置
+└── .env.example     # 环境变量示例
 ```
 
 ### 路由结构
@@ -182,18 +201,17 @@ fueny.cn/
 2. 在"API Keys"部分找到您的Public Key
 3. 复制这个Public Key
 
-### 5. 更新配置文件
+### 5. 更新环境变量
 
-1. 打开 `src/config/emailjs.js` 文件
-2. 用您在上述步骤中获取的实际值替换以下配置：
-   ```javascript
-   export const EMAILJS_CONFIG = {
-     SERVICE_ID: 'your_service_id', // 替换为您的Service ID
-     TEMPLATE_ID: 'your_template_id', // 替换为您的Template ID
-     PUBLIC_KEY: 'your_public_key', // 替换为您的Public Key
-     TO_EMAIL: 'your_email@example.com' // 替换为您希望接收邮件的邮箱
-   };
+1. 复制`.env.example`文件为`.env`
+2. 用您在上述步骤中获取的实际值替换环境变量：
    ```
+   VITE_EMAILJS_SERVICE_ID=your_service_id
+   VITE_EMAILJS_TEMPLATE_ID=your_template_id
+   VITE_EMAILJS_PUBLIC_KEY=your_public_key
+   VITE_EMAILJS_TO_EMAIL=your_email@example.com
+   ```
+3. 在Vercel部署时，在项目设置中添加相同的环境变量
 
 完成以上步骤后，您的联系表单将能够将用户提交的信息直接发送到您指定的邮箱。
 
