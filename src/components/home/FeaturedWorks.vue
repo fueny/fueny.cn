@@ -5,9 +5,8 @@
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div v-for="(work, index) in featuredWorks" :key="work.id"
-             class="work-card group"
-             :class="{ 'animate-fade-up': isFirstVisit }"
-             :style="isFirstVisit ? { 'animation-delay': (0.3 + index * 0.1) + 's' } : {}"
+             class="work-card group animate-fade-up"
+             :style="{ 'animation-delay': (0.3 + index * 0.1) + 's' }"
              @mouseenter="onMouseEnter"
              @mouseleave="onMouseLeave">
           <div class="relative overflow-hidden h-80">

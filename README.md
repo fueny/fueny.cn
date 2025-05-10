@@ -1,4 +1,4 @@
-# Fueny.cn - 个人作品集网站
+# Fueny | 点悟 - 个人作品集网站
 
 这是一个使用Vue 3和Tailwind CSS构建的现代化个人作品集网站。
 

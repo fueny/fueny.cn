@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'isFirstVisit': shouldAnimate }">
+  <div class="isFirstVisit">
     <Hero />
     <FeaturedWorks />
     <ServicesPreview />
@@ -23,14 +23,13 @@ defineOptions({
 // 获取全局状态
 const appState = useAppStateStore();
 
-// 使用appState中的isFirstVisit标志
-// 这样可以确保在第一次访问网站时显示动画
-const shouldAnimate = appState.isFirstVisit;
+// 始终启用动画效果，每次打开主页都显示下滑动画
+const alwaysAnimate = true;
 
-// 将动画标志提供给子组件
-provide('isFirstVisit', shouldAnimate);
+// 将动画标志提供给子组件，始终为true
+provide('isFirstVisit', alwaysAnimate);
 
-// 标记首次访问已完成，这样下次不会再显示动画
+// 仍然标记首次访问已完成，这只影响加载动画，不影响下滑动画
 // 但是如果用户刷新页面，appState中的isFirstVisit不会被重置
 appState.markFirstVisitComplete();
 </script>

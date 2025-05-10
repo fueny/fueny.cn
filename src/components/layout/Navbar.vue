@@ -13,7 +13,7 @@
           <!-- Logo -->
           <div class="flex-shrink-0">
             <router-link to="/" class="flex items-center" @click="closeMenu">
-              <span class="font-handwriting text-xl sm:text-2xl text-slate">Fueny</span>
+              <span class="font-handwriting text-xl sm:text-2xl text-slate">Fueny | 点悟</span>
             </router-link>
           </div>
 

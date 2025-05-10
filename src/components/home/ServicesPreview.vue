@@ -87,53 +87,47 @@ const initAnimations = () => {
   const fadeUpElements = document.querySelectorAll('.animate-fade-up');
   const scaleInElements = document.querySelectorAll('.animate-scale-in');
 
-  if (isFirstVisit) {
-    // 首次访问时，显示动画
+  // 始终显示动画，不再检查isFirstVisit
 
-    // 重置样式
-    gsap.set(fadeUpElements, { y: 30, opacity: 0 });
-    gsap.set(scaleInElements, { scale: 0.9, opacity: 0 });
+  // 重置样式
+  gsap.set(fadeUpElements, { y: 30, opacity: 0 });
+  gsap.set(scaleInElements, { scale: 0.9, opacity: 0 });
 
-    // 创建新的ScrollTrigger
-    [...fadeUpElements, ...scaleInElements].forEach((element) => {
-      const trigger = ScrollTrigger.create({
-        trigger: element,
-        start: 'top bottom-=100',
-        onEnter: () => {
-          // 获取动画延迟
-          const delay = element.style.animationDelay || '0s';
-          const delaySeconds = parseFloat(delay.replace('s', '')) || 0;
+  // 创建新的ScrollTrigger
+  [...fadeUpElements, ...scaleInElements].forEach((element) => {
+    const trigger = ScrollTrigger.create({
+      trigger: element,
+      start: 'top bottom-=100',
+      onEnter: () => {
+        // 获取动画延迟
+        const delay = element.style.animationDelay || '0s';
+        const delaySeconds = parseFloat(delay.replace('s', '')) || 0;
 
-          // 应用动画
-          if (element.classList.contains('animate-fade-up')) {
-            gsap.to(element, {
-              y: 0,
-              opacity: 1,
-              duration: 0.8,
-              delay: delaySeconds,
-              ease: 'power2.out'
-            });
-          } else if (element.classList.contains('animate-scale-in')) {
-            gsap.to(element, {
-              scale: 1,
-              opacity: 1,
-              duration: 0.8,
-              delay: delaySeconds,
-              ease: 'back.out(1.2)'
-            });
-          }
-        },
-        once: true
-      });
-
-      // 保存ScrollTrigger实例以便后续清理
-      scrollTriggers.push(trigger);
+        // 应用动画
+        if (element.classList.contains('animate-fade-up')) {
+          gsap.to(element, {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            delay: delaySeconds,
+            ease: 'power2.out'
+          });
+        } else if (element.classList.contains('animate-scale-in')) {
+          gsap.to(element, {
+            scale: 1,
+            opacity: 1,
+            duration: 0.8,
+            delay: delaySeconds,
+            ease: 'back.out(1.2)'
+          });
+        }
+      },
+      once: true
     });
-  } else {
-    // 非首次访问，直接显示最终状态
-    gsap.set(fadeUpElements, { y: 0, opacity: 1 });
-    gsap.set(scaleInElements, { scale: 1, opacity: 1 });
-  }
+
+    // 保存ScrollTrigger实例以便后续清理
+    scrollTriggers.push(trigger);
+  });
 };
 
 // 组件挂载时初始化
