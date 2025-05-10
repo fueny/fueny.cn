@@ -2,7 +2,7 @@
   <section class="py-20">
     <div class="page-container">
       <div class="flex flex-col md:flex-row items-center">
-        <div class="md:w-1/2 mb-10 md:mb-0 md:pr-12 animate-fade-up">
+        <div ref="textContentEl" class="md:w-1/2 mb-10 md:mb-0 md:pr-12 opacity-0 transform translate-y-8">
           <h2 class="section-title">关于我</h2>
           <p class="text-slate leading-relaxed mb-6">
             {{ portfolio.homeContent.aboutPreviewText }}
@@ -11,7 +11,7 @@
             了解更多
           </router-link>
         </div>
-        <div class="md:w-1/2 animate-fade-up" style="animation-delay: 0.2s">
+        <div ref="imageContentEl" class="md:w-1/2 opacity-0 transform translate-y-8">
           <div class="relative img-hover-zoom">
             <img
               :src="portfolio.artist.workingPhoto"
@@ -29,11 +29,51 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import { usePortfolioStore } from '../../stores/portfolio';
-import { inject } from 'vue';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// 确保GSAP插件已注册
+gsap.registerPlugin(ScrollTrigger);
 
 const portfolio = usePortfolioStore();
 
-// 从父组件获取是否是首次访问的标志
-const isFirstVisit = inject('isFirstVisit', true);
+// 创建引用
+const textContentEl = ref(null);
+const imageContentEl = ref(null);
+
+// 初始化动画
+onMounted(() => {
+  // 文本内容动画
+  ScrollTrigger.create({
+    trigger: textContentEl.value,
+    start: 'top bottom-=100',
+    onEnter: () => {
+      gsap.to(textContentEl.value, {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: 'power2.out'
+      });
+    },
+    once: true
+  });
+
+  // 图片内容动画
+  ScrollTrigger.create({
+    trigger: imageContentEl.value,
+    start: 'top bottom-=100',
+    onEnter: () => {
+      gsap.to(imageContentEl.value, {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        delay: 0.2,
+        ease: 'power2.out'
+      });
+    },
+    once: true
+  });
+});
 </script>

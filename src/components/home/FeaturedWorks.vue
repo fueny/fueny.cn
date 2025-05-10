@@ -1,12 +1,12 @@
 <template>
   <section class="py-20 bg-sand bg-opacity-30 relative">
     <div class="page-container">
-      <h2 class="section-title animate-fade-up">精选作品</h2>
+      <h2 ref="titleEl" class="section-title opacity-0 transform translate-y-8">精选作品</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div v-for="(work, index) in featuredWorks" :key="work.id"
-             class="work-card group animate-fade-up"
-             :style="{ 'animation-delay': (0.3 + index * 0.1) + 's' }"
+             :ref="el => { if(el) workCards[index] = el }"
+             class="work-card group opacity-0 transform translate-y-8"
              @mouseenter="onMouseEnter"
              @mouseleave="onMouseLeave">
           <div class="relative overflow-hidden h-80">
@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <div class="text-center mt-12 animate-fade-up" style="animation-delay: 0.5s">
+      <div ref="buttonEl" class="text-center mt-12 opacity-0 transform translate-y-8">
         <router-link to="/works" class="btn">
           查看全部作品
         </router-link>
@@ -41,15 +41,21 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import { usePortfolioStore } from '../../stores/portfolio';
-import { inject } from 'vue';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// 确保GSAP插件已注册
+gsap.registerPlugin(ScrollTrigger);
 
 const portfolio = usePortfolioStore();
 const featuredWorks = portfolio.featuredWorks;
 
-// 从父组件获取是否是首次访问的标志
-const isFirstVisit = inject('isFirstVisit', true);
+// 创建引用
+const titleEl = ref(null);
+const buttonEl = ref(null);
+const workCards = ref([]);
 
 // 鼠标悬停效果
 const onMouseEnter = (e) => {
@@ -86,6 +92,54 @@ const onMouseLeave = (e) => {
   });
 };
 
-// 不再需要复杂的初始化动画函数
-// 使用CSS类和内联样式直接实现动画效果
+// 初始化动画
+onMounted(() => {
+  // 标题动画
+  ScrollTrigger.create({
+    trigger: titleEl.value,
+    start: 'top bottom-=100',
+    onEnter: () => {
+      gsap.to(titleEl.value, {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: 'power2.out'
+      });
+    },
+    once: true
+  });
+
+  // 作品卡片动画
+  workCards.value.forEach((card, index) => {
+    ScrollTrigger.create({
+      trigger: card,
+      start: 'top bottom-=100',
+      onEnter: () => {
+        gsap.to(card, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          delay: index * 0.1,
+          ease: 'power2.out'
+        });
+      },
+      once: true
+    });
+  });
+
+  // 按钮动画
+  ScrollTrigger.create({
+    trigger: buttonEl.value,
+    start: 'top bottom-=100',
+    onEnter: () => {
+      gsap.to(buttonEl.value, {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: 'power2.out'
+      });
+    },
+    once: true
+  });
+});
 </script>

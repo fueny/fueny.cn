@@ -1,5 +1,5 @@
 <template>
-  <div class="isFirstVisit">
+  <div>
     <Hero />
     <FeaturedWorks />
     <ServicesPreview />
@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { provide } from 'vue';
+import { onMounted } from 'vue';
 import { useAppStateStore } from '../stores/appState';
 import Hero from '../components/home/Hero.vue';
 import FeaturedWorks from '../components/home/FeaturedWorks.vue';
@@ -23,13 +23,12 @@ defineOptions({
 // 获取全局状态
 const appState = useAppStateStore();
 
-// 始终启用动画效果，每次打开主页都显示下滑动画
-const alwaysAnimate = true;
-
-// 将动画标志提供给子组件，始终为true
-provide('isFirstVisit', alwaysAnimate);
-
-// 仍然标记首次访问已完成，这只影响加载动画，不影响下滑动画
+// 仍然标记首次访问已完成，这只影响加载动画
 // 但是如果用户刷新页面，appState中的isFirstVisit不会被重置
 appState.markFirstVisitComplete();
+
+// 组件挂载时确保滚动到顶部
+onMounted(() => {
+  window.scrollTo(0, 0);
+});
 </script>
