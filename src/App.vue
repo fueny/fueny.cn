@@ -11,7 +11,7 @@
     :class="{ 'opacity-0': !contentVisible }"
   >
     <Navbar />
-    <main class="flex-grow">
+    <main class="flex-grow pb-16 md:pb-0">
       <router-view v-slot="{ Component }">
         <transition name="page" mode="out-in">
           <keep-alive include="Home">
@@ -21,6 +21,7 @@
       </router-view>
     </main>
     <Footer />
+    <MobileNavBar />
   </div>
 </template>
 
@@ -30,6 +31,7 @@ import { useRouter } from 'vue-router';
 import { useAppStateStore } from './stores/appState';
 import Navbar from './components/layout/Navbar.vue';
 import Footer from './components/layout/Footer.vue';
+import MobileNavBar from './components/layout/MobileNavBar.vue';
 import LoadingScreen from './components/common/LoadingScreen.vue';
 
 // 状态

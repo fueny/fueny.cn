@@ -45,6 +45,13 @@ body {
     @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-12;
   }
 
+  /* 移动设备上为底部导航栏留出空间 */
+  @media (max-width: 767px) {
+    .page-container {
+      padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0));
+    }
+  }
+
   /* 响应式标题 */
   .section-title {
     @apply text-2xl sm:text-3xl md:text-4xl font-handwriting font-light text-slate mb-6 sm:mb-8 relative inline-block;
@@ -183,6 +190,37 @@ body {
 
   .loading-bar-container {
     margin-top: 0.5rem;
+  }
+}
+
+/* 移动导航栏样式 */
+@media (max-width: 767px) {
+  /* 为底部导航栏添加安全区域内边距 */
+  .has-mobile-nav {
+    padding-bottom: 4rem; /* 底部导航栏高度 */
+  }
+
+  /* 确保页面内容不被底部导航栏遮挡 */
+  .page-container {
+    padding-bottom: 2rem;
+  }
+
+  /* 底部导航栏活动项样式 */
+  .mobile-nav-active {
+    color: var(--color-charcoal);
+    position: relative;
+  }
+
+  .mobile-nav-active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background-color: var(--color-taupe);
+    border-radius: 1px;
   }
 }
 
